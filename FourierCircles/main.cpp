@@ -10,7 +10,11 @@ int main()
 {
     RenderWindow window(VideoMode(1000 ,1000 ), "Fourier") ;   
 
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(30);
+
+    RectangleShape line({100 , 2});
+    line.setFillColor(Color(164, 164, 164));
+
 
     Circle circle;
     circle.setCirclePosition({100 , 100});
@@ -21,7 +25,8 @@ int main()
     circle2.setCirclePosition({circle.getCirclePositionX() + (2*circle.getCircleRadius()) - circle2.getCircleRadius() , circle.getCirclePositionY() + circle.getCircleRadius() - circle2.getCircleRadius()});
     circle2.setCircleColor();
 
-    int i =0;
+    line.setPosition({circle.getCirclePositionX() + circle.getCircleRadius(), circle.getCirclePositionY() + circle.getCircleRadius()});
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -30,12 +35,14 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-        circle2.setRotate(circle2.getRotate() + 1 );
+        line.rotate(-4);
+        circle2.setCirclePosition(line.getTransform().transformPoint( line.getSize().x , line.getSize().y/2));
+        circle2.setCirclePosition({circle2.getCirclePositionX() - circle2.getCircleRadius(), circle2.getCirclePositionY() - circle2.getCircleRadius()});
         window.clear(sf::Color::Black);
         circle.drawCircle(window);
         circle2.drawCircle(window);
+        window.draw(line);
         window.display();
-        i += 2;
     }
     return 0;
 }
