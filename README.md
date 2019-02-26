@@ -1,6 +1,6 @@
 # SFML-Simulations
 Simulations with C++/SFML library
-# Basic Pendulum Waves
+# Basic Nested Circle
 <img src="fourier.gif" border="0" />
 
 
